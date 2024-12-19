@@ -1,9 +1,9 @@
-
 import {useState} from 'react';
 
 import Header from './component/Header';
 import Image from './assets/goals.jpg';
 import CourseList from './component/courseList';
+import NewGoal from './component/NewGoal';
 
 export type CourseGoal = {
   id: number;
@@ -14,12 +14,12 @@ function App() {
 
 const [goals, setGoals] = useState<CourseGoal[]>([])
 
-  function handleAddGoal(){
+  function handleAddGoal(goal:string, summary:string){
     setGoals((prevGoals) => {
       const newGoal: CourseGoal = {
         id:Math.random()*1000,
-        title:"Learn React TS",
-        description:"This is react corurse"
+        title:goal,
+        description:summary
       }
       return [...prevGoals,newGoal ]
     })
@@ -34,7 +34,7 @@ const [goals, setGoals] = useState<CourseGoal[]>([])
         <Header image={{src:Image, alt:'List of goals'}}>
           <h1>Your Course Goals</h1>
         </Header>
-        <button onClick={handleAddGoal}>Add Goal</button>
+        <NewGoal onAddGoal={handleAddGoal}/>
         <CourseList goals={goals} onDeleteGoal={handleDeleteGoal}/>
        
         
@@ -44,6 +44,52 @@ const [goals, setGoals] = useState<CourseGoal[]>([])
 }
 
 export default App
+
+// import {useState} from 'react';
+
+// import Header from './component/Header';
+// import Image from './assets/goals.jpg';
+// import CourseList from './component/courseList';
+
+// export type CourseGoal = {
+//   id: number;
+//   title:string;
+//   description: string
+// }
+// function App() {
+
+// const [goals, setGoals] = useState<CourseGoal[]>([])
+
+//   function handleAddGoal(){
+//     setGoals((prevGoals) => {
+//       const newGoal: CourseGoal = {
+//         id:Math.random()*1000,
+//         title:"Learn React TS",
+//         description:"This is react corurse"
+//       }
+//       return [...prevGoals,newGoal ]
+//     })
+//   }
+
+//   function handleDeleteGoal(id:number){
+//     setGoals(prevGoals => prevGoals.filter((goal) => goal.id !== id ))
+//   }
+
+//   return (
+//     <>
+//         <Header image={{src:Image, alt:'List of goals'}}>
+//           <h1>Your Course Goals</h1>
+//         </Header>
+//         <button onClick={handleAddGoal}>Add Goal</button>
+//         <CourseList goals={goals} onDeleteGoal={handleDeleteGoal}/>
+       
+        
+        
+//     </>
+//   )
+// }
+
+// export default App
 
 // import {useState} from 'react';
 
